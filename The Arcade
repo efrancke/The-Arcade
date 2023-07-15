@@ -1,0 +1,510 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace New_Code_Folder
+{
+    class Program
+    {
+        static void Main(string[] args)
+        { 
+            
+            //Introduction and option selection start
+            
+            string option = "0";
+            while (option != "exit")
+            {
+                Console.Clear(); 
+                Console.WriteLine("Welcome to The Arcade!\nType the name of a game and hit enter to play a game from the list.\nIf you would like to exit The Arcade, type 'exit' and hit enter.");
+                Console.WriteLine("1. Goblin Fight\n2. Tic Tac Toe\n3. Simon Says");
+                option = (Console.ReadLine());
+                if (option.ToLower() == "goblin fight")
+                {
+                    Console.Clear();
+                    GoblinFight();
+                }
+                if (option.ToLower() == "tic tac toe")
+                {
+                    Console.Clear();
+                    TicTacToe();
+                }
+                if (option.ToLower() == "simon says")
+                {
+                    Console.Clear();
+                    SimonSays();
+                }
+
+            }
+            Console.WriteLine("Thanks for playing!");
+        }
+
+        //Introduction and option selection end
+
+        //Goblin Fight game start
+
+        static void GoblinFight()
+        {
+            string approachAction = "Fight";
+            while (approachAction.ToLower() == "fight")            
+            {
+                Console.WriteLine("A Goblin approaches.\nWill you...\nFight\nRun\n--------------------------");
+                approachAction = Convert.ToString(Console.ReadLine());
+                Console.WriteLine("--------------------------");
+                if(approachAction == "Fight" || approachAction == "fight")
+                {
+                    Console.WriteLine("You approach the Goblin.");
+                    int health = 20;
+                    int goblinHealth = 20;
+                    while (health > 0 && goblinHealth > 0)
+                    {
+                        Console.WriteLine("Will you...\nAttack\nBlock\nHeal\n--------------------------");
+                        string encounterAction = Convert.ToString(Console.ReadLine());
+                        Random rnd = new Random();
+                        int goblinAction = rnd.Next(1, 4);
+                        Console.WriteLine("--------------------------");
+                        if (encounterAction == "Attack" || encounterAction == "attack" && goblinAction == 1)
+                        {
+                            Console.WriteLine("You attacked.\nThe Goblin attacked.\nYou both took 5 damage.");
+                            health = health - 5;
+                            goblinHealth = goblinHealth - 5;
+                            Console.WriteLine("You now have " + health + " health");
+                            Console.WriteLine("The Goblin now has " + goblinHealth + " health\n--------------------------");
+                        }
+                        else if (encounterAction == "Attack" || encounterAction == "attack" && goblinAction == 2)
+                        {
+                            Console.WriteLine("You attacked.\nThe Goblin blocked the attack.\nYou both took 0 damage.");
+                            Console.WriteLine("You now have " + health + " health");
+                            Console.WriteLine("The Goblin now has " + goblinHealth + " health\n--------------------------");
+                        }
+                        else if (encounterAction == "Attack" || encounterAction == "attack" && goblinAction == 3)
+                        {
+                            Console.WriteLine("You attacked.\nThe Goblin tried to heal.\nYou interrupted the Goblins heal.\nThe Goblin took 5 damage.");
+                            goblinHealth = goblinHealth - 5;
+                            Console.WriteLine("You now have " + health + " health");
+                            Console.WriteLine("The Goblin now has " + goblinHealth + " health\n--------------------------");
+                        }
+                        else if (encounterAction == "Block" || encounterAction == "block" && goblinAction == 1)
+                        {
+                            Console.WriteLine("You blocked.\nThe Goblin attacked.\nYou blocked the Goblin's attack.\nYou both took 0 damage.");
+                            Console.WriteLine("You now have " + health + " health");
+                            Console.WriteLine("The Goblin now has " + goblinHealth + " health\n--------------------------");
+                        }
+                        else if (encounterAction == "Block" || encounterAction == "block" && goblinAction == 2)
+                        {
+                            Console.WriteLine("You blocked.\nThe Goblin blocked.\nYou both took 0 damage.");
+                            Console.WriteLine("You now have " + health + " health");
+                            Console.WriteLine("The Goblin now has " + goblinHealth + " health\n--------------------------");
+                        }
+                        else if (encounterAction == "Block" || encounterAction == "block" && goblinAction == 3)
+                        {
+                            Console.WriteLine("You blocked.\nThe Goblin healed.\nThe Goblin regained 5 health.");
+                            goblinHealth = goblinHealth + 5;
+                            Console.WriteLine("You now have " + health + " health");
+                            Console.WriteLine("The Goblin now has " + goblinHealth + " health\n--------------------------");
+                        }
+                        else if (encounterAction == "Heal" || encounterAction == "heal" && goblinAction == 1)
+                        {
+                            Console.WriteLine("You tried to heal.\nThe Goblin attacked.\nThe Goblin interrupted your heal\nYou took 5 damage.");
+                            health = health - 5;
+                            Console.WriteLine("You now have " + health + " health");
+                            Console.WriteLine("The Goblin now has " + goblinHealth + " health\n--------------------------");
+                        }
+                        else if (encounterAction == "Heal" || encounterAction == "heal" && goblinAction == 2)
+                        {
+                            Console.WriteLine("You tried to heal.\nThe Goblin blocked. You regained 5 health.");
+                            health = health + 5;
+                            Console.WriteLine("You now have " + health + " health");
+                            Console.WriteLine("The Goblin now has " + goblinHealth + " health\n--------------------------");
+                        }
+                        else if (encounterAction == "Heal" || encounterAction == "heal" && goblinAction == 3)
+                        {
+                            Console.WriteLine("You tried to heal.\nGoblin tried to heal.\nYou both regained 5 health.");
+                            health = health + 5;
+                            goblinHealth = goblinHealth + 5;
+                            Console.WriteLine("You now have " + health + " health");
+                            Console.WriteLine("The Goblin now has " + goblinHealth + " health\n--------------------------");
+                        }
+                    }
+                    if (goblinHealth == 0)
+                    {
+                        Console.WriteLine("You defeated the Goblin");
+                    }
+                    if (health == 0)
+                    {
+                        Console.WriteLine("You were defeated by the Goblin");
+                    }
+                }
+            }
+            Console.WriteLine("Got away safely.");
+            System.Threading.Thread.Sleep(1500);
+
+        }
+
+        //Goblin Fight game end
+
+        //Tic Tac Toe game start
+
+        static void TicTacToe()
+        {
+            string playAgain = "yes";
+            while (playAgain == "yes" || playAgain == "Yes")
+            {
+                Console.Clear();
+                string a1 = " ";
+                string b1 = " ";
+                string c1 = " ";
+                string a2 = " ";
+                string b2 = " ";
+                string c2 = " ";
+                string a3 = " ";
+                string b3 = " ";
+                string c3 = " ";
+                int win = 0;
+                string playerOneMove = " ";
+                int playerTurn = 0;
+                int playerValidEntry = 0;
+
+                Console.WriteLine("Welcome to Tic Tac Toe!\n--------------\nPlayer 1 = O.\nPlayer 2 = X\nType the coordinates of the spot you would like ex. a1.\n--------------");
+
+
+                Console.WriteLine("  a   b   c");
+                Console.WriteLine("1 " + a1 + " | " + b1 + " | " + c1);
+                Console.WriteLine("  --+---+--");
+                Console.WriteLine("2 " + a2 + " | " + b2 + " | " + c2);
+                Console.WriteLine("  --+---+--");
+                Console.WriteLine("3 " + a3 + " | " + b3 + " | " + c3);
+                Console.WriteLine("--------------");
+
+                while (win == 0)
+                {
+                    playerTurn = 1;
+                    playerValidEntry = 0;
+
+                    while (playerValidEntry == 0)
+                    {
+                        Console.WriteLine("Where would you like to go player 1?");
+                        playerOneMove = Convert.ToString(Console.ReadLine());
+                        Console.WriteLine("--------------");
+                        if (a1 == " " && playerOneMove == "a1")
+                        {
+                        a1 = "O";
+                        playerValidEntry = 1;
+                        }
+                        else if (b1 == " " && playerOneMove == "b1")
+                        {
+                            b1 = "O";
+                            playerValidEntry = 1;
+                        }
+                        else if (c1 == " " && playerOneMove == "c1")
+                        {
+                            c1 = "O";
+                            playerValidEntry = 1;
+                        }
+                        else if (a2 == " " && playerOneMove == "a2")
+                        {
+                            a2 = "O";
+                            playerValidEntry = 1;
+                        }
+                        else if (b2 == " " && playerOneMove == "b2")
+                        {
+                            b2 = "O";
+                            playerValidEntry = 1;
+                        }
+                        else if (c2 == " " && playerOneMove == "c2")
+                        {
+                            c2 = "O";
+                            playerValidEntry = 1;
+                        }
+                        else if (a3 == " " && playerOneMove == "a3")
+                        {
+                            a3 = "O";
+                            playerValidEntry = 1;
+                        }
+                        else if (b3 == " " && playerOneMove == "b3")
+                        {
+                            b3 = "O";
+                            playerValidEntry = 1;
+                        }
+                        else if (c3 == " " && playerOneMove == "c3")
+                        {
+                            c3 = "O";
+                            playerValidEntry = 1;
+                        }
+                    }
+
+                    Console.WriteLine("  a   b   c");
+                    Console.WriteLine("1 " + a1 + " | " + b1 + " | " + c1);
+                    Console.WriteLine("  --+---+--");
+                    Console.WriteLine("2 " + a2 + " | " + b2 + " | " + c2);
+                    Console.WriteLine("  --+---+--");
+                    Console.WriteLine("3 " + a3 + " | " + b3 + " | " + c3);
+                    Console.WriteLine("--------------");
+                    
+                    if (a1 == "O" && a1 == b1 && a1 == c1 && playerTurn == 1)
+                    {
+                        win = 1;
+                    }
+                    else if (a2 == "O" && a2 == b2 && a2 == c2 && playerTurn == 1)
+                    {
+                        win = 1;
+                    }
+                    else if (a3 == "O" && a3 == b3 && a3 == c3 && playerTurn == 1)
+                    {
+                        win = 1;
+                    }
+                    else if (a1 == "O" && a1 == a2 && a2 == a3 && playerTurn == 1)
+                    {
+                        win = 1;
+                    }
+                    else if (b1 == "O" && b1 == b2 && b2 == b3 && playerTurn == 1)
+                    {
+                        win = 1;
+                    }
+                    else if (c1 == "O" && c1 == c2 && c2 == c3 && playerTurn == 1)
+                    {
+                        win = 1;
+                    }
+                    else if (a1 == "O" && a1 == b2 && b2 == c3 && playerTurn == 1)
+                    {
+                        win = 1;
+                    }
+                    else if (a3 == "O" && a3 == b2 && b2 == c1 && playerTurn == 1)
+                    {
+                        win = 1;
+                    }
+                    
+                    playerTurn = 2;
+                    playerValidEntry = 0;
+
+                    if (win != 1 && a1 != " " && a2 != " " && a3 != " " && b1 != " " && b2 != " " && b3 != " " && c1 != " " && c2 != " " && c3 != " ")    
+                        {
+                            win = 3;
+                        }
+
+                    if (win == 0)
+                    {
+                        while (playerValidEntry == 0)
+                        {
+                            Console.WriteLine("Where would you like to go player 2?");
+                            playerOneMove = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("--------------");
+                            if (a1 == " " && playerOneMove == "a1")
+                            {
+                            a1 = "X";
+                            playerValidEntry = 1;
+                            }
+                            else if (b1 == " " && playerOneMove == "b1")
+                            {
+                                b1 = "X";
+                                playerValidEntry = 1;
+                            }
+                            else if (c1 == " " && playerOneMove == "c1")
+                            {
+                                c1 = "X";
+                                playerValidEntry = 1;
+                            }
+                            else if (a2 == " " && playerOneMove == "a2")
+                            {
+                                a2 = "X";
+                                playerValidEntry = 1;
+                            }
+                            else if (b2 == " " && playerOneMove == "b2")
+                            {
+                                b2 = "X";
+                                playerValidEntry = 1;
+                            }
+                            else if (c2 == " " && playerOneMove == "c2")
+                            {
+                                c2 = "X";
+                                playerValidEntry = 1;
+                            }
+                            else if (a3 == " " && playerOneMove == "a3")
+                            {
+                                a3 = "X";
+                                playerValidEntry = 1;
+                            }
+                            else if (b3 == " " && playerOneMove == "b3")
+                            {
+                                b3 = "X";
+                                playerValidEntry = 1;
+                            }
+                            else if (c3 == " " && playerOneMove == "c3")
+                            {
+                                c3 = "X";
+                                playerValidEntry = 1;
+                            }
+                        }
+                    }
+
+                    Console.WriteLine("  a   b   c");
+                    Console.WriteLine("1 " + a1 + " | " + b1 + " | " + c1);
+                    Console.WriteLine("  --+---+--");
+                    Console.WriteLine("2 " + a2 + " | " + b2 + " | " + c2);
+                    Console.WriteLine("  --+---+--");
+                    Console.WriteLine("3 " + a3 + " | " + b3 + " | " + c3);
+                    Console.WriteLine("--------------");
+                    
+                    if (a1 == "X" && a1 == b1 && a1 == c1 && playerTurn == 2)
+                    {
+                        win = 2;
+                    }
+                    else if (a2 == "X" && a2 == b2 && a2 == c2 && playerTurn == 2)
+                    {
+                        win = 2;
+                    }
+                    else if (a3 == "X" && a3 == b3 && a3 == c3 && playerTurn == 2)
+                    {
+                        win = 2;
+                    }
+                    else if (a1 == "X" && a1 == a2 && a2 == a3 && playerTurn == 2)
+                    {
+                        win = 2;
+                    }
+                    else if (b1 == "X" && b1 == b2 && b2 == b3 && playerTurn == 2)
+                    {
+                        win = 2;
+                    }
+                    else if (c1 == "X" && c1 == c2 && c2 == c3 && playerTurn == 2)
+                    {
+                        win = 2;
+                    }
+                    else if (a1 == "X" && a1 == b2 && b2 == c3 && playerTurn == 2)
+                    {
+                        win = 2;
+                    }
+                    else if (a3 == "X" && a3 == b2 && b2 == c1 && playerTurn == 2)
+                    {
+                        win = 2;
+                    }
+                }
+                if (win == 1)
+                {
+                    Console.WriteLine("Player 1 wins!");
+                }
+                if (win == 2)
+                {
+                    Console.WriteLine("Player 2 wins!");
+                }
+                if (win == 3)
+                {
+                    Console.WriteLine("No one wins");
+                }
+
+                playAgain = " ";
+
+                while (playAgain != "yes" && playAgain != "Yes" && playAgain != "no" && playAgain != "No" )
+                {
+                    Console.WriteLine("Do you want to play again?");
+                    playAgain = Convert.ToString(Console.ReadLine());
+                }
+            }
+            if (playAgain == "no" || playAgain == "No")
+            {
+                Console.WriteLine("Thanks for playing!");
+            }
+        }
+
+        //Tic Tac Toe game end
+
+        //Simon Says game start
+
+        static void SimonSays()
+        {
+            string playAgain = "yes";
+            while (playAgain == "yes" || playAgain == "Yes")
+            {
+                List<string> inputList = new List<string>();
+                Console.Clear();
+                Console.WriteLine("Welcome to Simon Says.\nType the number of the quadrant marked and press enter after each number.\nType any key to begin.");
+                Console.WriteLine(" 1 | 2 \n---+---\n 4 | 3 ");
+                Console.ReadLine();
+                int lose = 0;
+                int roundNumber = 1;
+                int currentRound = 0;
+                string a = " ";
+                string b = " ";
+                string c = " ";
+                string d = " ";
+                while (lose == 0) 
+                {
+                    Random rnd = new Random();
+                    int nextNumber = rnd.Next(1, 5);
+                    inputList.Add(Convert.ToString(nextNumber));
+                    for (int i = 0; i < inputList.Count; i++)
+                    {
+                        a = " ";
+                        b = " ";
+                        c = " ";
+                        d = " ";
+                        Console.Clear();
+                        Console.WriteLine(" "+ a +" | " + b + " \n---+---\n " + c + " | " + d + " ");
+                        System.Threading.Thread.Sleep(750);
+                        Console.Clear();
+                        if (inputList[i] == "1")
+                        {
+                            a = "1";
+                        }
+                        if (inputList[i] == "2")
+                        {
+                            b = "2";
+                        }
+                        if (inputList[i] == "3")
+                        {
+                            c = "3";
+                        }
+                        if (inputList[i] == "4")
+                        {
+                            d = "4";
+                        }
+                        Console.WriteLine(" "+ a +" | " + b + " \n---+---\n " + c + " | " + d + " ");
+                        System.Threading.Thread.Sleep(1000);
+                        Console.Clear();
+                    }
+
+                    a = " ";
+                    b = " ";
+                    c = " ";
+                    d = " ";
+                    Console.Clear();
+                    Console.WriteLine(" "+ a +" | " + b + " \n---+---\n " + c + " | " + d + " ");
+                    System.Threading.Thread.Sleep(1000);
+                    Console.Clear();
+                    
+                    currentRound = 0;
+
+                    while (roundNumber != currentRound && lose == 0)
+                    {
+                        string input = Convert.ToString(Console.ReadLine());
+                        if (input != inputList[currentRound])
+                        {
+                            lose = 1;
+                        }
+                        currentRound ++;
+                    }
+
+                    Console.WriteLine("-----------------");
+
+                    roundNumber ++;
+                }
+                if (lose == 1) 
+                {
+                    roundNumber --;
+                    Console.WriteLine("You lose.\nYou made it to round " + roundNumber + ".");
+                }
+                playAgain = " ";
+
+                while (playAgain != "yes" && playAgain != "Yes" && playAgain != "no" && playAgain != "No" )
+                {
+                    Console.WriteLine("Do you want to play again?");
+                    playAgain = Convert.ToString(Console.ReadLine());
+                }
+            }
+            if (playAgain == "no" || playAgain == "No")
+            {
+                Console.WriteLine("Thanks for playing!");
+            }
+        }
+
+        //End Simon Says
+    }
+}
